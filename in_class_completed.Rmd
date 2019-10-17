@@ -112,7 +112,7 @@ mod_rf$finalModel
 
 
 ```{r}
-caret::varImp(mod_rf)
+plot(caret::varImp(mod_rf))
 ```
 
 
@@ -129,7 +129,7 @@ mod_logreg = train(dat_train_up %>% select(-Class),
 
 pred_logreg = predict(mod_logreg, dat_test)
 
-mod_logreg
+summary(mod_logreg)
 ```
 
 ```{r}
@@ -157,5 +157,11 @@ mod_rf_grid = train(Class ~ .,
                     trControl = train_control)
 
 mod_rf_grid
+```
+
+
+```{r}
+pred_mod_rf_grid_pred = predict(mod_rf_grid, dat_test)
+confusionMatrix(pred_mod_rf_grid_pred, dat_test %>% select(Class) %>% pull())
 ```
 
